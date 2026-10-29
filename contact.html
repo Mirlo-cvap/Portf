@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contactez ARCHITECT-01 pour discuter de votre projet de création de site web.">
+  <meta name="theme-color" content="#080d1a">
+  <title>Contact | ARCHITECT-01</title>
+  <link rel="icon" href="images/logo.webp" type="image/webp">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="header">
+  <a href="index.html" class="logo" aria-label="ARCHITECT-01, accueil">
+    <img src="images/logo.webp" alt="" width="46" height="46">
+    <span class="brand">ARCHITECT<b>-01</b></span>
+  </a>
+
+  <button class="menu-toggle" id="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navigation">☰</button>
+
+  <nav class="navigation" id="navigation">
+    <a href="index.html">Accueil</a>
+    <a href="services.html">Services</a>
+    <a href="contact.html" class="nav-contact" aria-current="page">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+    <section class="page-hero">
+        <p class="eyebrow">ENTRONS EN CONTACT</p>
+
+        <h1>Parlons de votre projet.</h1>
+
+        <p>
+            Vous avez une idée, une entreprise à présenter ou un site
+            web à créer ? Décrivez votre besoin pour que nous puissions
+            en discuter.
+        </p>
+    </section>
+
+    <section class="contact-layout">
+        <!-- INFORMATIONS DE CONTACT -->
+<aside class="contact-info">
+
+    <p class="eyebrow">ARCHITECT-01</p>
+
+    <h2>Un projet commence par une conversation.</h2>
+
+    <p>
+        Présentez-moi votre idée, vos objectifs et vos besoins.
+        Nous pourrons discuter de la création de votre site web.
+    </p>
+
+    <div class="contact-detail">
+
+        <span class="detail-icon">@</span>
+
+        <div>
+            <h3>E-mail</h3>
+
+            <p>Pour me contacter pas e-mail.</p>
+
+            <a href="mailto:architect01x@gmail.com">
+                architect01x@gmail.com
+            </a>
+        </div>
+
+    </div>
+
+    <div class="contact-detail">
+
+        <span class="detail-icon">W</span>
+
+        <div>
+            <h3>WhatsApp</h3>
+
+            <p>Discutons directement de votre projet.</p>
+
+            <a
+                href="https://wa.me/2250564661552"
+                target="_blank"
+                rel="noopener noreferrer">
+                Me contacter sur WhatsApp
+            </a>
+        </div>
+
+    </div>
+
+</aside>
+
+        <!-- FORMULAIRE -->
+        <div class="form-card">
+            <h2>Décrivez votre projet</h2>
+
+            <p class="form-intro">
+                Les champs marqués d'un astérisque (*) sont obligatoires.
+            </p>
+
+            <form id="contact-form">
+
+                <div class="form-group">
+                    <label for="name">Votre nom *</label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Ex. : Jean Kouassi"
+                        autocomplete="name"
+                        required
+                        minlength="2">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Votre adresse e-mail *</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="vous@exemple.com"
+                        autocomplete="email"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="project">Type de projet *</label>
+
+                    <select id="project" name="project" required>
+                        <option value="">Choisissez un service</option>
+                        <option value="Site vitrine">
+                            Site vitrine
+                        </option>
+                        <option value="Page d\'accueil">Page d\'accueil</option>
+                        <option value="Refonte de site">
+                            Refonte d'un site web
+                        </option>
+                        <option value="Autre projet">
+                            Autre projet
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="budget">Budget indicatif</label>
+
+                    <select id="budget" name="budget">
+                        <option value="À discuter">
+                            À discuter
+                        </option>
+                        <option value="Moins de 50 000 FCFA">
+                            Moins de 50 000 FCFA
+                        </option>
+                        <option value="50 000 à 100 000 FCFA">
+                            50 000 à 100 000 FCFA
+                        </option>
+                        <option value="100 000 à 250 000 FCFA">
+                            100 000 à 250 000 FCFA
+                        </option>
+                        <option value="Plus de 250 000 FCFA">
+                            Plus de 250 000 FCFA
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Votre message *</label>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="6"
+                        placeholder="Décrivez le site que vous souhaitez créer..."
+                        required
+                        minlength="10"></textarea>
+                </div>
+
+                <button type="submit" class="button button-primary form-submit">
+                    Envoyer sur WhatsApp
+                </button>
+
+                <p id="form-status" class="form-status"
+                   role="status" aria-live="polite"></p>
+
+                <p class="privacy-note">
+                    En cliquant sur le bouton, vous ouvrirez WhatsApp
+                    avec un message prérempli. Vous devrez confirmer
+                    vous-même son envoi.
+                </p>
+
+            </form>
+        </div>
+
+    </section>
+
+</main>
+
+<footer class="footer">
+    <a href="index.html" class="footer-brand">ARCHITECT<b>-01</b></a>
+
+    <p>Un projet ? Parlons-en.</p>
+
+    <p class="copyright">
+        &copy; <span class="current-year"></span> ARCHITECT-01.
+        Tous droits réservés.
+    </p>
+</footer>
+
+</body>
+</html>

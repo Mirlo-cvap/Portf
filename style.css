@@ -1,0 +1,235 @@
+/* =========================================
+   1. BASE
+========================================= */
+:root{--background:#080d1a;--surface:#111a2d;--surface-light:#192640;--text:#f5f7ff;--muted:#c0c9dc;--primary:#648cff;--primary-dark:#426de9;--primary-light:#9ab4ff;--border:rgba(255,255,255,.12);--container:1200px}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font:17px/1.8 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--background);color:var(--text);min-width:320px;overflow-wrap:break-word}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+a,button{-webkit-tap-highlight-color:transparent}
+button,input,select,textarea{font:inherit}
+:focus-visible{outline:3px solid var(--primary-light);outline-offset:4px}
+::selection{background:var(--primary);color:#fff}
+
+/* =========================================
+   2. EN-TÊTE (animé)
+========================================= */
+.header{position:sticky;top:0;z-index:100;min-height:84px;padding:12px max(5%,calc((100% - 1400px)/2));display:flex;align-items:center;justify-content:space-between;gap:24px;background:rgba(8,13,26,.85);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:min-height .3s,box-shadow .3s}
+.header.scrolled{min-height:64px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+
+/* Ligne de tracé sous l'en-tête : se dessine au chargement, puis un reflet la parcourt */
+.header::before,.header::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;pointer-events:none}
+.header::after{background:linear-gradient(90deg,transparent,var(--primary) 25%,var(--primary-light) 50%,var(--primary) 75%,transparent);transform-origin:left;animation:draw 1.2s .3s cubic-bezier(.2,.7,.2,1) backwards}
+.header::before{z-index:1;background:linear-gradient(90deg,transparent,#fff,transparent) no-repeat -90px 0/90px 100%;animation:glint 7s 2s infinite}
+
+/* Logo + nom */
+.logo{display:inline-flex;align-items:center;gap:12px;flex-shrink:0}
+.logo img{width:46px;height:46px;padding:5px;background:#f7f7f7;border-radius:12px;object-fit:contain;box-shadow:0 0 0 1px rgba(255,255,255,.15),0 6px 18px rgba(100,140,255,.25);animation:pop .7s cubic-bezier(.3,1.5,.5,1) backwards;transition:width .3s,height .3s,transform .4s}
+.header.scrolled .logo img{width:38px;height:38px}
+.logo:hover img{transform:rotate(-6deg) scale(1.06)}
+.brand{display:inline-block;font-size:1.15rem;font-weight:800;letter-spacing:.14em;line-height:1;background:linear-gradient(100deg,var(--text) 42%,var(--primary-light) 50%,var(--text) 58%) 150% 0/250% 100% repeat-x;-webkit-background-clip:text;background-clip:text;color:transparent;animation:reveal .9s .25s cubic-bezier(.2,.7,.2,1) backwards,shimmer 7s 1.6s infinite}
+.brand b{-webkit-text-fill-color:var(--primary-light);font-weight:600}
+
+@keyframes draw{from{transform:scaleX(0)}}
+@keyframes glint{0%{background-position:-90px 0}30%,100%{background-position:calc(100% + 90px) 0}}
+@keyframes pop{from{opacity:0;transform:scale(.5) rotate(-25deg)}}
+@keyframes reveal{from{opacity:0;clip-path:inset(0 100% 0 0)}}
+@keyframes shimmer{0%{background-position:150% 0}25%,100%{background-position:-50% 0}}
+@keyframes drop{from{opacity:0;transform:translateY(-8px)}}
+
+/* Navigation */
+.navigation{display:flex;align-items:center;gap:32px}
+.navigation a{position:relative;color:var(--muted);font-weight:600;transition:color .2s}
+.navigation a:hover,.navigation a[aria-current]{color:#fff}
+.navigation a:not(.nav-contact)::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;background:var(--primary);transform:scaleX(0);transition:transform .25s}
+.navigation a:not(.nav-contact):hover::after,.navigation a[aria-current]::after{transform:scaleX(1)}
+.navigation .nav-contact{background:var(--primary);color:#fff;padding:12px 23px;border-radius:10px;transition:background .2s}
+.navigation .nav-contact:hover{background:var(--primary-dark)}
+.menu-toggle{display:none;min-width:48px;min-height:48px;border:1px solid var(--border);background:var(--surface);color:#fff;border-radius:10px;font-size:1.6rem;cursor:pointer}
+
+/* =========================================
+   3. BOUTONS
+========================================= */
+.button{min-height:54px;display:inline-flex;align-items:center;justify-content:center;text-align:center;padding:13px 25px;border-radius:10px;font-weight:700;line-height:1.4;transition:transform .2s,background .2s}
+.button:hover{transform:translateY(-3px)}
+.button-primary{color:#fff;background:var(--primary);border:1px solid var(--primary)}
+.button-primary:hover{background:var(--primary-dark)}
+.button-secondary{color:#fff;border:1px solid var(--border)}
+.button-secondary:hover{background:var(--surface-light)}
+.button-light{color:#101a31;background:#fff}
+.button-light:hover{background:#e5ecff}
+
+/* =========================================
+   4. ACCUEIL
+========================================= */
+.hero{width:min(90%,var(--container));min-height:620px;margin:0 auto;padding:85px 0;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:center;gap:65px}
+.hero-content{width:100%;max-width:650px}
+.eyebrow{color:var(--primary-light);font-size:.85rem;font-weight:800;letter-spacing:2px;line-height:1.5;margin-bottom:20px}
+.hero h1{font-size:clamp(2.5rem,4.5vw,4.5rem);line-height:1.15;letter-spacing:-1.5px;margin-bottom:28px}
+.hero h1 span,.highlight{color:var(--primary-light)}
+.hero-description{max-width:600px;color:var(--muted);font-size:1.1rem;line-height:1.9;margin-bottom:32px}
+.hero-buttons{display:flex;flex-wrap:wrap;align-items:center;gap:16px}
+.hero-visual{width:100%;max-width:500px;margin:auto;padding:20px;background:radial-gradient(circle at top right,rgba(100,140,255,.28),transparent 70%)}
+.visual-card{overflow:hidden;background:var(--surface);border:1px solid var(--border);border-radius:22px;box-shadow:0 25px 70px rgba(0,0,0,.3)}
+.visual-top{display:flex;gap:8px;padding:18px;border-bottom:1px solid var(--border)}
+.visual-top span{width:12px;height:12px;background:#66738d;border-radius:50%}
+.visual-content{padding:45px 35px}
+.visual-label{color:var(--muted);font-size:.8rem;letter-spacing:2px;margin-bottom:20px}
+.visual-title{font-size:clamp(1.7rem,3vw,2.4rem);font-weight:700;line-height:1.5}
+.visual-line{width:75px;height:5px;background:var(--primary);border-radius:5px;margin:30px 0}
+.visual-content>p:last-child{color:var(--muted);font-size:.95rem}
+
+/* =========================================
+   5. SECTIONS
+========================================= */
+.section{width:min(90%,var(--container));margin:0 auto;padding:95px 0}
+.about,.portfolio-section{border-top:1px solid var(--border)}
+.section-heading{max-width:800px;margin:0 auto 55px;text-align:center}
+.section-heading h2,.cta h2{font-size:clamp(2rem,4vw,3rem);line-height:1.3;margin-bottom:22px}
+.section-heading>p:last-child{color:var(--muted);font-size:1.05rem}
+.feature-grid,.service-grid,.portfolio-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.feature-card,.service-card{padding:32px;background:var(--surface);border:1px solid var(--border);border-radius:18px;transition:transform .2s,border-color .2s}
+.feature-card:hover,.service-card:hover{transform:translateY(-5px);border-color:var(--primary)}
+.feature-icon,.detail-icon{display:grid;place-items:center;flex-shrink:0;background:rgba(100,140,255,.15);color:var(--primary-light);border-radius:14px;font-weight:800}
+.feature-icon{width:54px;height:54px;margin-bottom:25px;font-size:1.1rem}
+.detail-icon{width:52px;height:52px;font-size:1.2rem}
+.feature-card h3,.service-card h3{font-size:1.25rem;line-height:1.4;margin-bottom:15px}
+.feature-card p,.service-card p{color:var(--muted);font-size:1rem}
+
+/* Bandeau de contact */
+.cta{padding:90px 5%;text-align:center;background:radial-gradient(circle at top,rgba(100,140,255,.22),transparent 70%),var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.cta h2{max-width:850px;margin:0 auto 22px}
+.cta>p:not(.eyebrow){max-width:700px;margin:0 auto 32px;color:var(--muted);font-size:1.05rem}
+
+/* Titres des pages internes */
+.page-hero{padding:95px 5% 80px;text-align:center;background:radial-gradient(circle at top,rgba(100,140,255,.2),transparent 75%)}
+.page-hero h1{max-width:950px;margin:0 auto 25px;font-size:clamp(2.3rem,5vw,3.8rem);line-height:1.2;letter-spacing:-1px}
+.page-hero>p:last-child{max-width:760px;margin:0 auto;color:var(--muted);font-size:1.1rem;line-height:1.9}
+
+/* =========================================
+   6. SERVICES ET PORTFOLIO
+========================================= */
+.services-section{padding-top:65px}
+.service-number{display:inline-block;color:var(--primary-light);font-size:1.8rem;font-weight:800;margin-bottom:25px}
+.text-link{display:inline-block;margin-top:24px;color:var(--primary-light);font-weight:700;transition:color .2s}
+.text-link:hover{color:#fff}
+.portfolio-card{overflow:hidden;background:var(--surface);border:1px solid var(--border);border-radius:18px;display:flex;flex-direction:column}
+/* Le dégradé sert de fond si l'image est absente */
+.portfolio-image{aspect-ratio:16/10;min-height:200px;position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(100,140,255,.22),var(--surface-light))}
+.portfolio-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.portfolio-card:hover .portfolio-image img{transform:scale(1.04)}
+.portfolio-info{flex:1;padding:28px}
+.portfolio-category{color:var(--primary-light);font-size:.8rem;font-weight:800;letter-spacing:1.5px;margin-bottom:12px}
+.portfolio-info h3{font-size:1.3rem;line-height:1.4;margin-bottom:15px}
+.portfolio-info>p:not(.portfolio-category){color:var(--muted)}
+
+/* =========================================
+   7. CONTACT
+========================================= */
+.contact-layout{width:min(90%,1100px);margin:0 auto;padding:60px 0 100px;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:start;gap:55px}
+.contact-info{padding-top:25px}
+.contact-info h2{font-size:clamp(1.8rem,3vw,2.5rem);line-height:1.35;margin-bottom:25px}
+.contact-info>p:not(.eyebrow){color:var(--muted);font-size:1.05rem;margin-bottom:35px}
+.contact-detail{display:flex;align-items:flex-start;gap:18px;margin-top:30px}
+.contact-detail h3{font-size:1.1rem;line-height:1.5}
+.contact-detail p{color:var(--muted);font-size:.95rem}
+.contact-detail a{display:inline-block;margin-top:8px;color:var(--primary-light);overflow-wrap:anywhere}
+.form-card{padding:38px;background:var(--surface);border:1px solid var(--border);border-radius:20px}
+.form-card h2{font-size:1.8rem;line-height:1.4;margin-bottom:8px}
+.form-intro{color:var(--muted);font-size:.95rem;margin-bottom:30px}
+.form-group{margin-bottom:24px}
+.form-group label{display:block;font-weight:700;margin-bottom:10px}
+.form-group input,.form-group select,.form-group textarea{display:block;width:100%;padding:15px 16px;background:var(--background);color:var(--text);border:1px solid var(--border);border-radius:10px}
+.form-group input,.form-group select{min-height:54px}
+.form-group textarea{min-height:160px;resize:vertical}
+.form-group ::placeholder{color:#929fba}
+.form-group option{background:var(--background);color:var(--text)}
+.form-submit{width:100%;min-height:58px;cursor:pointer}
+.form-status{margin-top:18px;color:var(--primary-light);font-size:.95rem}
+.form-status:empty{display:none}
+.privacy-note{margin-top:18px;color:var(--muted);font-size:.85rem;line-height:1.7}
+
+/* =========================================
+   8. PIED DE PAGE
+========================================= */
+.footer{padding:45px 5%;text-align:center;border-top:1px solid var(--border)}
+.footer-brand{font-size:1.2rem;font-weight:800;letter-spacing:.14em}
+.footer-brand b{color:var(--primary-light);font-weight:600}
+.footer p{margin-top:12px;color:var(--muted);font-size:.95rem}
+.footer .copyright{margin-top:25px;font-size:.85rem}
+
+/* =========================================
+   9. TABLETTES
+========================================= */
+@media (max-width:900px){
+.header{padding-inline:4%}
+.navigation{gap:18px}
+.hero{gap:30px;padding:70px 0}
+.hero h1{font-size:clamp(2.3rem,5vw,3.4rem)}
+.hero-buttons .button{width:100%}
+.feature-grid,.service-grid,.portfolio-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.contact-layout{gap:30px}
+.form-card{padding:28px}
+}
+
+/* =========================================
+   10. TÉLÉPHONES
+========================================= */
+@media (max-width:640px){
+.header{min-height:72px;padding:10px 5%;gap:12px}
+.header.scrolled{min-height:60px}
+.logo img{width:42px;height:42px}
+.brand{font-size:1.05rem}
+.menu-toggle{display:block}
+.navigation{display:none;position:absolute;top:100%;left:0;right:0;padding:18px 5% 24px;background:var(--surface);border-bottom:1px solid var(--border);flex-direction:column;align-items:stretch;gap:8px}
+.navigation.open{display:flex;animation:drop .25s ease}
+.navigation a{padding:13px 15px;font-size:1.05rem}
+.navigation a:not(.nav-contact)::after{display:none}
+.navigation a[aria-current]:not(.nav-contact){background:var(--surface-light);border-radius:10px}
+.navigation .nav-contact{margin-top:5px;text-align:center}
+.hero{min-height:auto;padding:65px 0;grid-template-columns:minmax(0,1fr);gap:40px;text-align:center}
+.hero-content{margin:0 auto}
+.hero h1{font-size:clamp(2.3rem,9vw,3.2rem);letter-spacing:-.8px}
+.hero-description{font-size:1.05rem;margin-inline:auto}
+.hero-buttons{flex-direction:column;align-items:stretch;gap:14px}
+.hero-visual{max-width:440px;padding:8px}
+.visual-content{padding:35px 22px;text-align:left}
+.visual-title{font-size:1.8rem}
+.section{padding:70px 0}
+.section-heading{margin-bottom:38px}
+.section-heading h2,.cta h2{font-size:2rem}
+.section-heading>p:last-child{font-size:1rem}
+.feature-grid,.service-grid,.portfolio-grid{grid-template-columns:minmax(0,1fr);gap:22px}
+.feature-card,.service-card{padding:28px}
+.page-hero{padding:70px 6% 55px}
+.page-hero h1{font-size:clamp(2.1rem,8vw,2.7rem);letter-spacing:-.5px}
+.page-hero>p:last-child{font-size:1.05rem}
+.contact-layout{padding:35px 0 70px;grid-template-columns:minmax(0,1fr);gap:38px}
+.contact-info{padding-top:0}
+.contact-info h2{font-size:2rem}
+.form-card{padding:28px 22px}
+.form-card h2{font-size:1.6rem}
+.form-group input,.form-group select,.form-group textarea{font-size:16px}
+.cta{padding:70px 6%}
+.cta .button{width:100%;max-width:360px}
+.footer{padding:38px 5%}
+}
+
+/* =========================================
+   11. TRÈS PETITS ÉCRANS
+========================================= */
+@media (max-width:360px){
+.brand{font-size:.95rem;letter-spacing:.1em}
+.hero h1{font-size:2.1rem}
+.form-card{padding:22px 16px}
+.feature-card,.service-card,.portfolio-info{padding:22px}
+}
+
+/* =========================================
+   12. MOUVEMENT RÉDUIT (accessibilité)
+========================================= */
+@media (prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+*,::before,::after{animation:none!important;transition:none!important}
+}
